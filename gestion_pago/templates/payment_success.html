@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+    <title>Payment Success</title>
+</head>
+<body>
+    <h1>Payment Success</h1>
+    <p>Status: {{ status }}</p>
+    <p>Amount: {{ amount }}</p>
+    <p>Order: {{ buy_order }}</p>
+    <p>Authorization Code: {{ authorization_code }}</p>
+</body>
+</html>
+{% endblock %}

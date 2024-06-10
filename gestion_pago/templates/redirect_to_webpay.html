@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+    <title>Redireccionando a Webpay...</title>
+</head>
+<body>
+    <h1>Redireccionando a Webpay...</h1>
+    <form id="webpay-form" action="{{ url }}" method="POST">
+        <input type="hidden" name="token_ws" value="{{ token }}">
+    </form>
+    <script type="text/javascript">
+        document.getElementById("webpay-form").submit();
+    </script>
+</body>
+</html>
+{% endblock %}

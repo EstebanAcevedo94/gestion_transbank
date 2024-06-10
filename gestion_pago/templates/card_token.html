@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokenización de Tarjeta</title>
+    <script src="https://www.mercadopago.com/v2/security.js" view="home"></script>
+</head>
+<body>
+    <h1>Tokenización de Tarjeta</h1>
+    <form id="mercadoPagoForm">
+        <label for="cardNumber">Número de Tarjeta:</label>
+        <input type="text" id="cardNumber" data-checkout="cardNumber" placeholder="Ejemplo: 4509 9535 6623 3704" required>
+
+        <label for="cardExpirationMonth">Mes de Expiración:</label>
+        <input type="text" id="cardExpirationMonth" data-checkout="cardExpirationMonth" placeholder="Ejemplo: 12" required>
+
+        <label for="cardExpirationYear">Año de Expiración:</label>
+        <input type="text" id="cardExpirationYear" data-checkout="cardExpirationYear" placeholder="Ejemplo: 25" required>
+
+        <label for="securityCode">Código de Seguridad:</label>
+        <input type="text" id="securityCode" data-checkout="securityCode" placeholder="Ejemplo: 123" required>
+
+        <label for="cardholderName">Nombre del Titular:</label>
+        <input type="text" id="cardholderName" data-checkout="cardholderName" placeholder="Ejemplo: Juan Pérez" required>
+
+        <input type="hidden" id="cardToken" name="cardToken">
+
+        <button type="submit">Tokenizar Tarjeta</button>
+    </form>
+
+    <script>
+        const mercadoPagoForm = document.getElementById('mercadoPagoForm');
+
+        mercadoPagoForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            Mercadopago.createToken(mercadoPagoForm, function(status, response) {
+                if (status === 200 && response.id) {
+                    const cardToken = response.id;
+                    document.getElementById('cardToken').value = cardToken;
+
+                    // Aquí podrías enviar el token de tarjeta al servidor para procesar el pago
+                    console.log('Token de tarjeta generado:', cardToken);
+                } else {
+                    console.error('Error al tokenizar la tarjeta:', response);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

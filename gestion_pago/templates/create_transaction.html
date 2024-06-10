@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+<head>
+    <title>Iniciar Transacción</title>
+</head>
+<body>
+    <h1>Iniciar Transacción</h1>
+    <form method="POST" action="{% url 'create_transaction' %}">
+        {% csrf_token %}
+        <button type="submit">Pagar</button>
+    </form>
+</body>
+</html>
+{% endblock %}
